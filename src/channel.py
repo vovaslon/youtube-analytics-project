@@ -1,10 +1,10 @@
-import json
-# необходимо установить через: pip install google-api-python-client
+import os
+
 from googleapiclient.discovery import build
 
-from helper.youtube_api_manual import printj, youtube
-
-
+# api_key: str = os.getenv('YT_API_KEY')
+# print(os.getenv('YT_API_KEY'))
+#
 class Channel:
     """Класс для ютуб-канала"""
     api_key = 'AIzaSyAf6dv819F8knMNnLsYzLb38j3l3GROa5c'
@@ -17,6 +17,5 @@ class Channel:
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
-        channel_id = self.channel_id
-        channel = youtube.channels().list(id=channel_id, part='snippet,statistics')
+        channel = self.youtube.channels().list(id=self.channel_id, part='snippet,statistics').execute()
         print(channel)
